@@ -73,3 +73,5 @@ end
 gem 'mysql2', '~> 0.5.2'
 gem "devise", "~> 4.9"
 
+gem 'bootstrap', '~> 4.4.1'
+gem 'jquery-rails'

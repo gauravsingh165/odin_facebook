@@ -17,4 +17,35 @@
   .devise-actions {
     margin-top: 15px;
   }
-  
+  .form-container {
+    background-color:  #FFE4B5;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin: 0 auto; /* Center the container horizontally */
+    width: 500px; /* Adjust the width as needed */
+    text-align: center; /* Center the content inside the container */
+  }
+  .field {
+    margin-bottom: 10px;
+  }
+
+  /* Add custom styling for buttons */
+  .custom-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .custom-button:hover {
+    background-color: #0056b3;
+  }
+
+  /* Center the "Back" link */
+  .back-link {
+    text-align: center;
+    margin-top: 10px;
+  }
