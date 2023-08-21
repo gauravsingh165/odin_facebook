@@ -1,0 +1,20 @@
+/* app/assets/stylesheets/custom_devise_styles.scss */
+.devise-form-container {
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .devise-field {
+    margin-bottom: 15px;
+  }
+  
+  .devise-label {
+    font-weight: bold;
+  }
+  
+  .devise-actions {
+    margin-top: 15px;
+  }
+  
