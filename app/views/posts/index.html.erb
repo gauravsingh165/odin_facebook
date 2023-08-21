@@ -1,6 +1,7 @@
-<h1>welcome to our page</h1>
+<h1 style="text-align: center; color: green;">WELCOME-TO-FACEBOOK</h1>
 <h1>All Posts</h1>
 <% @post.each do |post| %>
-  <li><%= post.content %></li>
-<% end %>
+  <li><%= post.content %> --  <%= link_to 'View Post', post_path(@post) %>
+</li>
 
+<% end %>
