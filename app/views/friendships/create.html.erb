@@ -1,0 +1,7 @@
+<%= form_with(url: friendships_path, method: :post) do |form| %>
+  <!-- Other form fields -->
+  <%= form.hidden_field :receiver_id, value: @receiver.id %>
+  <%= form.submit "Send Friend Request" %>
+<% end %>
+
+<%= link_to "Back to Dashboard", root_url %>
