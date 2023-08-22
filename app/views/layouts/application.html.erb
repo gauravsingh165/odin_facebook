@@ -16,6 +16,7 @@
        max-height: 40px; /* Adjust this value as needed */
        }
     </style>
+<%= stylesheet_link_tag 'custom_devise_styles', media: 'all' %>
 
   </head>
   <body style="background-color:powderblue;">
@@ -37,18 +38,18 @@
             <a class="nav-link" href="#">Link</a>
           </li>
           <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
+            <input class="form-control me-2 rounded-0 " type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success rounded-0 " type="submit">Search</button>
           </form>
         </div>
           <li class="nav-item">
             <% if user_signed_in? %>
               <strong><%= current_user.email %><strong>
-              <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navabr-link btn btn-outline-info'%>
-              <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'navbar-link btn btn-outline-danger', data: { turbo_frame: 'navbar', turbo_method: :delete } %>
+              <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navabr-link btn btn-outline-info  rounded-0'%>
+              <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'navbar-link btn btn-outline-danger  rounded-0', data: { turbo_frame: 'navbar', turbo_method: :delete } %>
             <% else %>
-              <%= link_to 'Sign up', new_user_registration_path, :class => 'navabr-link btn btn-outline-success'%>
-              <%= link_to 'Login', new_user_session_path, :class => 'navabr-link btn btn-success'%>
+              <%= link_to 'Sign up', new_user_registration_path, :class => 'navabr-link btn btn-outline-success rounded-0 '%>
+              <%= link_to 'Login', new_user_session_path, :class => 'navabr-link btn btn-success rounded-0 '%>
             <%end%>
           </li>
       </div>

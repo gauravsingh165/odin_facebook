@@ -1,14 +1,37 @@
-<h1 style="text-align: center; color: green;">WELCOME-TO-FACEBOOK</h1>
-<h1>All Posts</h1>
-<% @post.each do |post| %>
-  <li><%= post.content %> --  <%= link_to 'View Post', post_path(post) %>
-
-</li>
-
-<% end %>
-<%= link_to 'Create New Post', new_post_path ,class:'btn btn-primary'%>
 
 <style>
+.post-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.post-title {
+  margin: 5px;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  text-align: center;
+}
+</style>
+<div style="text-align: center;">
+  <h1 style="color: green;">WELCOME TO FACEBOOK</h1>
+  <h1>All Posts</h1>
+  <div class="post-list">
+    <% @post.each do |post| %>
+    <ul>
+      <span class="post-title">
+        <%= link_to post.title, post_path(post) %>
+      </span>
+      </ul>
+    <% end %>
+  </div>
+  <%= link_to 'Create New Post', new_post_path, class: 'btn btn-primary  rounded-0' %>
+</div>
+
+<%# <style>
   body {
     background-image: url('/assets/welcome-message-for-facebook.png');
     background-size: 900px;
@@ -18,5 +41,5 @@
     height: 100vh; 
     margin: 0; 
   }
-</style>
+</style> %>
 

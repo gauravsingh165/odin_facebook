@@ -27,8 +27,8 @@ class PostsController < ApplicationController
   end
 
   def edit
-    # puts "Params ID: #{params[:id].inspect}"  # Debugging line
-    # @post = Post.find(params[:id])
+    puts "Params ID: #{params[:id].inspect}"  # Debugging line
+    @post = Post.find(params[:id])
   end
   def update
     @post = Post.find(params[:id])
@@ -41,12 +41,15 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect_to posts_path, notice: 'Post was successfully deleted.'
   end
 
 private
 
 def post_params
-  params.require(:post).permit(:content,:user_id)
+  params.require(:post).permit(:content,:user_id,:title)
 end
 
 
