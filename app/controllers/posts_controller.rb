@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
+  # before_action :check_authorization, only: %i[edit update]
+
 
   def index
     @post= Post.all
@@ -25,8 +27,17 @@ class PostsController < ApplicationController
   end
 
   def edit
+    # puts "Params ID: #{params[:id].inspect}"  # Debugging line
+    # @post = Post.find(params[:id])
   end
   def update
+    @post = Post.find(params[:id])
+
+    if @post.update(post_params)
+      redirect_to post_path(@post), notice: 'Post was successfully updated.'
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -35,6 +46,8 @@ class PostsController < ApplicationController
 private
 
 def post_params
-  params.require(:post).permit(:content)
+  params.require(:post).permit(:content,:user_id)
 end
+
+
 end

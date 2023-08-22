@@ -1,7 +1,20 @@
 <h1 style="text-align: center; color: green;">WELCOME-TO-FACEBOOK</h1>
 <h1>All Posts</h1>
 <% @post.each do |post| %>
-  <li><%= post.content %> --  <%= link_to 'View Post', post_path(@post) %>
+  <li><%= post.content %> --  <%= link_to 'View Post', post_path(post) %>
+
 </li>
 
 <% end %>
+<style>
+  body {
+    background-image: url('/assets/welcome-message-for-facebook.png');
+    background-size: 900px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100%;
+    height: 100vh; 
+    margin: 0; 
+  }
+</style>
+

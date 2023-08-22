@@ -31,7 +31,10 @@
               <%= f.label :email %>
               <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
             </div>
-
+            <div class="form-outline mb-4">
+              <%= f.label :first_name %>
+              <%= f.text_field :first_name, autofocus: true, autocomplete: "email", class: "form-control" %>
+            </div>
             <div class="form-outline mb-4">
               <%= f.label :password %>
               <% if @minimum_password_length %>
