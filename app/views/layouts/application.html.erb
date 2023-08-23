@@ -22,17 +22,17 @@
   <body style="background-color:powderblue;">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <%= image_tag 'nnn.avif' %>
-      </a>
-        <a class="navbar-brand" href="#">FaceBook</a>
+        <a class="navbar-brand" href="<%= root_path %>">
+          <%= image_tag 'nnn.avif' %>
+        </a>
+        <a class="navbar-brand" href="<%= root_path %>">FaceBook</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+           <%= link_to 'Create New Post', new_post_path, class: 'btn btn-outline-primary rounded-0' %>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Link</a>
@@ -51,7 +51,7 @@
               <%= link_to 'Sign up', new_user_registration_path, :class => 'navabr-link btn btn-outline-success rounded-0 '%>
               <%= link_to 'Login', new_user_session_path, :class => 'navabr-link btn btn-success rounded-0 '%>
             <%end%>
-          </li>
+          </li>           
       </div>
     </nav>
     <p class="notice"><%= notice %></p>

@@ -1,3 +1,7 @@
-<%= form_tag user_send_friend_request_path(@user), method: :post do %>
+<!-- <%= form_tag friend_requests_path, method: :post do %>
+  <%= hidden_field_tag :user_id, @user.id %>
   <%= submit_tag 'Send Friend Request' %>
-<% end %>
+<% end %>-->
+<%= link_to 'Send Friend Request', send_friend_request_path(user_id: @user.id), method: :post %>
+<%= link_to 'Accept Friend Request', accept_friend_request_path(user_id: @user.id, friend_id: @friend.id), method: :post %>
+<%= link_to 'Decline Friend Request', decline_friend_request_path(user_id: @user.id, friend_id: @friend.id), method: :post %>

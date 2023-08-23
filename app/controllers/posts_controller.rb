@@ -15,7 +15,7 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.build(post_params) 
     if @post.save
-      redirect_to users_path, notice: 'Post was successfully created.'
+      redirect_to posts_path, notice: 'Post was successfully created.'
     else
       render :new
     end
@@ -45,11 +45,22 @@ class PostsController < ApplicationController
     @post.destroy
     redirect_to posts_path, notice: 'Post was successfully deleted.'
   end
+  def like
+    @post = Post.find(params[:id])
+    @like = @post.likes.create(user_id: current_user.id)
+    redirect_to post_path(@post)
+  end
 
+  def unlike
+    @post = Post.find(params[:id])
+    @like = @post.likes.find_by(user_id: current_user.id)
+    @like.destroy if @like
+    redirect_to post_path(@post)
+  end
 private
 
 def post_params
-  params.require(:post).permit(:content,:user_id,:title)
+  params.require(:post).permit(:content,:user_id,:title,:image)
 end
 
 

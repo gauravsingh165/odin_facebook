@@ -1,6 +1,5 @@
 <!-- app/views/posts/new.html.erb -->
 <%= stylesheet_link_tag 'custom_devise_styles', media: 'all' %>
-
 <div style="text-align:center">
   <h2>NEW POST</h2>
   <%= form_for(@post) do |f| %>
@@ -13,14 +12,16 @@
       <%= f.text_area :content, placeholder: 'Enter content...', rows: 4, style: 'width: 50%; padding: 8px; border: 1px solid #ccc; border-radius: 4px  rounded-0;'%>
     </div>
     <div style="margin-bottom: 15px;">
-      <%= f.label :user_id, style: 'font-weight: bold;' %><br>
-      <%= f.text_field :user_id, value: current_user.id, disabled: true, style: 'width: 50%; padding: 8px; border: 1px solid #ccc; border-radius: 4px  rounded-0;' %>
+      <%= f.label :image, style: 'font-weight: bold;' %><br>
+      <%= f.file_field :image, placeholder: 'Enter content...', rows: 4, style: 'width: 50%; padding: 8px; border: 1px solid #ccc; border-radius: 4px  rounded-0;' %>
+    </div>
+    <div style="margin-bottom: 15px;">
+      <%= f.hidden_field :user_id, value: current_user.id %>
     </div>
     <div style="margin-top: 15px;">
-      <%= f.submit 'Create Post', class: 'btn btn-primary rounded-0 ', style: 'background-color: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;' %>
-      <%= link_to 'Back', posts_path ,  class: 'btn btn-primary rounded-0'%>
+      <%= f.submit 'Create Post', class: 'btn btn-primary rounded-0', style: 'background-color: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;' %>
+      <%= link_to 'Back', posts_path, class: 'btn btn-primary rounded-0' %>
     </div>
   <% end %>
-  
 </div>
 
