@@ -17,4 +17,7 @@ class User < ApplicationRecord
   def like?(post)
     likes.exists?(post_id: post.id)
   end
+  def name 
+    "#{first_name} #{last_name}"
+  end
 end

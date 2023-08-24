@@ -16,6 +16,7 @@
        max-height: 40px; /* Adjust this value as needed */
        }
     </style>
+   
 <%= stylesheet_link_tag 'custom_devise_styles', media: 'all' %>
 
   </head>
@@ -38,8 +39,8 @@
             <a class="nav-link" href="#">Link</a>
           </li>
           <form class="d-flex">
-             <%= text_field_tag :search, params[:search], placeholder: "Search users..." %>
-             <%= submit_tag "Search", class: "search-button btn-btn-primary" %>
+             <%= text_field_tag :search, params[:user], placeholder: "Search friends..." %>
+             <%= submit_tag "Search", class: "search-button btn btn-outline-primary rounded-0" %>
           </form>
         </div>
           <li class="nav-item">
@@ -54,6 +55,7 @@
           </li>           
       </div>
     </nav>
+    
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>
