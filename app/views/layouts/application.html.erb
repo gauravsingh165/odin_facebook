@@ -16,6 +16,7 @@
        max-height: 40px; /* Adjust this value as needed */
        }
     </style>
+    
    
 <%= stylesheet_link_tag 'custom_devise_styles', media: 'all' %>
 
@@ -45,7 +46,7 @@
         </div>
           <li class="nav-item">
             <% if user_signed_in? %>
-              <strong><%= current_user.email %><strong>
+              <strong><%= current_user.name.titleize %><strong>
               <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navabr-link btn btn-outline-info  rounded-0'%>
               <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'navbar-link btn btn-outline-danger  rounded-0', data: { turbo_frame: 'navbar', turbo_method: :delete } %>
             <% else %>

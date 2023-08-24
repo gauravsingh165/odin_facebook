@@ -18,9 +18,9 @@
   box-sizing: border-box;
 }
 </style>
-<% if @user %>
+<!--<% if @user %>
   <%= link_to 'View Profile', user_path(@user) %>
-<% end %>
+<% end %>-->
 
 <div style="text-align: center;">
   <h1 style="color: #1877f2; font-size: 3rem; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); padding: 20px; background-color: #ffffff; border-radius: 10px;">FACEBOOK</h1>
@@ -30,6 +30,7 @@
    
       <div class="post-card">
         <span class="post-title">
+          <%= post.user.name %>
            <%= link_to post.title, post_path(post) %>
            <% if post.image.attached? %>
             <%= image_tag post.image, style: 'width: 350px; height: 150px;' %>
@@ -40,15 +41,15 @@
   </div>
     <% end %>
 </div>
-<%# <style>
-  body {
-    background-image: url('/assets/welcome-message-for-facebook.png');
-    background-size: 900px;
-    background-repeat: no-repeat;
-    background-position: center center;
-    width: 100%;
-    height: 100vh; 
-    margin: 0; 
-  }
-</style> %>
 
+<style>
+body {
+  background-image: url('/assets/fb.webp');
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Keep the background fixed while scrolling */
+  background-position: center center;
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+}
+</style>
