@@ -1,14 +1,10 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
   # before_action :check_authorization, only: %i[edit update]
-
-
   def index
-    @post= Post.all
+    @post = Post.all
+    @user = current_user
   end
-
-
-
   def new
     @post = Post.new
   end
@@ -42,9 +38,13 @@ class PostsController < ApplicationController
 
   def destroy
     @post = Post.find(params[:id])
+    @post.comments.destroy_all # Delete associated comments
+    @post.likes.destroy_all    # Delete associated likes
     @post.destroy
     redirect_to posts_path, notice: 'Post was successfully deleted.'
   end
+  
+  
   def like
     @post = Post.find(params[:id])
     @like = @post.likes.create(user_id: current_user.id)
@@ -57,11 +57,9 @@ class PostsController < ApplicationController
     @like.destroy if @like
     redirect_to post_path(@post)
   end
-private
+ private
 
-def post_params
+ def post_params
   params.require(:post).permit(:content,:user_id,:title,:image)
-end
-
-
+ end
 end

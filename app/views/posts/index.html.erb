@@ -10,6 +10,7 @@
   margin: 10px;
   padding: 20px;
   width: 400px; 
+  height:200px;
   background-color: #f5f5f5;
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -17,6 +18,9 @@
   box-sizing: border-box;
 }
 </style>
+<% if @user %>
+  <%= link_to 'View Profile', user_path(@user) %>
+<% end %>
 
 <div style="text-align: center;">
   <h1 style="color: #1877f2; font-size: 3rem; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); padding: 20px; background-color: #ffffff; border-radius: 10px;">FACEBOOK</h1>
@@ -26,7 +30,11 @@
    
       <div class="post-card">
         <span class="post-title">
-          <%= link_to post.title, post_path(post) %>
+           <%= link_to post.title, post_path(post) %>
+           <% if post.image.attached? %>
+            <%= image_tag post.image, style: 'width: 350px; height: 150px;' %>
+              <% end %><br>
+          
         </span>
       </div>
   </div>

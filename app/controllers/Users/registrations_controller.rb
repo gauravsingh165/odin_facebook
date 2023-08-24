@@ -12,15 +12,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   # def create
+  #   debugger
   #   super
   # end
-  def create
-    super do |resource|
-      if resource.persisted?
-        flash[:notice] = "Welcome! Your account has been successfully created."
-      end
-    end
-  end
   # GET /resource/edit
   # def edit
   #   super
@@ -60,7 +54,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :first_name, :password, :password_confirmation])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :first_name,:last_name, :phone, :password, :password_confirmation])
   end
   # The path used after sign up.
   # def after_sign_up_path_for(resource)
