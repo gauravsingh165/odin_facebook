@@ -21,33 +21,30 @@
 <!--<% if @user %>
   <%= link_to 'View Profile', user_path(@user) %>
 <% end %>-->
-
-<%= link_to 'Friend Requests', received_friend_requests_path, class: 'btn btn-bounded-info' %>
-
-<%= link_to "Users Index", users_path %>
-<%= link_to "Notification Index", notifications_path %> 
-<div style="text-align: center;">
-  <h1 style="color: #1877f2; font-size: 3rem; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); padding: 20px; background-color: #ffffff; border-radius: 10px;">FACEBOOK</h1>
-  <h1>All Posts</h1>
-   <% @post.each do |post| %> 
-  <div class="post-list">
-   
-      <div class="post-card">
-        <span class="post-title">
-         <% if post.user %>
-      <%= post.user.name %>
-    <% else %>
-      Unknown User
-    <% end %>
-           <%= link_to post.title, post_path(post) %>
-           <% if post.image.attached? %>
-            <%= image_tag post.image, style: 'width: 350px; height: 150px;' %>
-              <% end %><br>
-          
-        </span>
+  <%= link_to 'Friend Requests', received_friend_requests_path, class: 'btn btn-bounded-info' %>
+  <%= link_to 'Create New Post', new_post_path, class: 'btn btn-outline-primary rounded-0' %>
+        
+  <%# <%= link_to "Users Index", users_path %> 
+  <%= link_to "Notification Index", notifications_path %> 
+  <div style="text-align: center;">
+    <h1 style="color: red">All Posts</h1>
+     <% @post.each do |post| %> 
+      <div class="post-list">
+        <div class="post-card">
+          <span class="post-title">
+            <% if post.user %>
+              <%= post.user.name %>
+            <% else %>
+              Unknown User
+            <% end %>
+             <%= link_to post.title, post_path(post) %>
+            <% if post.image.attached? %>
+              <%= image_tag post.image, style: 'width: 350px; height: 150px;' %>
+            <% end %><br>
+          </span>
+        </div>
       </div>
-  </div>
-    <% end %>
+   <% end %>
 </div>
 
 <style>

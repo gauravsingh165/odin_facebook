@@ -1,3 +1,22 @@
+
+
+
+<h1>User Index</h1>
+<%= form_tag(users_path, method: :get) do %>
+  <%= label_tag :search, 'Search by First Name:' %>
+  <%= text_field_tag :search, params[:search] %>
+  <%= submit_tag 'Search' %>
+<% end %> 
+    <% @users.each do |user| %>
+    
+       <%= link_to "#{user.name}", user %>-
+       <%= link_to 'Send Friend Request', new_friend_request_path(recipient_id: user.id) %><br>
+
+     
+    <% end %>
+ 
+
+<!-- Display posts of the current user
 <%= link_to "Posts Index", posts_path %>
 <h1>All Users</h1>
 <ul>
@@ -9,7 +28,7 @@
       <% end %>
     </li>
   <% end %>
-</ul>
+</ul> -->
 
 
 
