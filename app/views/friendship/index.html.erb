@@ -1,0 +1,8 @@
+<!-- app/views/friendship/index.html.erb -->
+<h1>Your Friends</h1>
+
+<ul>
+  <% @friends.each do |friend| %>
+    <li><%= friend.name %> (<%= link_to 'Remove', friendship_path(friend), method: :delete, data: { confirm: 'Are you sure?' } %>)</li>
+  <% end %>
+</ul>

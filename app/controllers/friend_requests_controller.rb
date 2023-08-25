@@ -1,22 +1,28 @@
 class FriendRequestsController < ApplicationController
-    before_action :authenticate_user!
-    before_action :authenticate_user!
+  before_action :authenticate_user!
+  def new
+    @recipient = User.find(params[:recipient_id])
+    @friend_request = current_user.sent_friend_requests.build(recipient: @recipient)
+  end
+  def create
+    recipient = User.find(params[:recipient_id])
+    current_user.sent_friend_requests.create(recipient: recipient)
+    redirect_to users_path, notice: 'Friend request sent!'
+  end
 
-    def create
-      @user = User.find(params[:user_id])
-      current_user.sent_friend_requests.build(receiver: @user)
-      if current_user.save
-        flash[:notice] = 'Friend request sent!'
-      else
-        flash[:error] = 'Unable to send friend request.'
-      end
-      redirect_to @user
-    end
-    
-      def destroy
-        @friendship = current_user.received_friendships.find(params[:id])
-        @friendship.destroy
-        flash[:notice] = "Declined friend request."
-        redirect_to root_url
-      end
+  def accept
+    request = FriendRequest.find(params[:id])
+    current_user.friends << request.sender
+    request.destroy
+    redirect_to users_path, notice: 'Friend request accepted!'
+  end
+
+  def reject
+    request = FriendRequest.find(params[:id])
+    request.destroy
+    redirect_to users_path, notice: 'Friend request rejected!'
+  end
+  def received
+    @received_requests = current_user.received_friend_requests
+  end
 end

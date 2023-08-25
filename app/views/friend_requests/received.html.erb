@@ -1,0 +1,20 @@
+<!-- app/views/friend_requests/received.html.erb -->
+<h1>Received Friend Requests</h1>
+
+<% if @received_requests.any? %>
+  <ul>
+    <% @received_requests.each do |request| %>
+      <li>
+        <%= request.sender.username %> wants to be your friend.
+        <%= link_to 'Accept', accept_friend_request_path(request), method: :post %> |
+        <%= link_to 'Reject', reject_friend_request_path(request), method: :delete %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No friend requests received.</p>
+<% end %>
+
+<%= link_to 'Back', users_path %>
+
+<%= link_to 'Go to Posts', posts_path, class: 'btn btn-primary' %>

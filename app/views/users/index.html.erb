@@ -1,23 +1,18 @@
-<div style='text-align:center'>
-<h1>Create New Profile</h1>
-<%= form_for current_user do |f| %>
-  <div>
-    <%= f.label :first_name %>
-    <%= f.text_field :first_name %>
-  </div>
-  <div>
-    <%= f.label :last_name %>
-    <%= f.text_field :last_name %>
-  </div>
-  <div>
-    <%= f.label :phone %>
-    <%= f.text_field :phone %>
-  </div>
-  <div>
-    <%= f.submit 'Create Profile' %>
-  </div>
-<% end %>
-</div>
+<%= link_to "Posts Index", posts_path %>
+<h1>All Users</h1>
+<ul>
+  <% @users.each do |user| %>
+    <li>
+      <%= user.name %>
+      <% unless current_user == user %>
+        <%= link_to 'Send Friend Request', new_friend_request_path(recipient_id: user.id) %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+
+
 <style>
 body {
   background-image: url('/assets/fb.webp');

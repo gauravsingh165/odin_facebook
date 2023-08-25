@@ -1,0 +1,6 @@
+<%= user.name %>
+<% if !current_user.friends_with?(user) %>
+  <%= link_to "Add Friend", friendships_path(friend_id: user.id), method: :post %>
+<% else %>
+  <%= link_to "Remove Friend", friendship_path(user.friendship_with(current_user)), method: :delete %>
+<% end %>
