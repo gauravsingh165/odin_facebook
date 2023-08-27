@@ -1,8 +1,22 @@
-<!-- app/views/friendship/index.html.erb -->
-<h1>Your Friends</h1>
+<!-- The view listing received friend requests -->
+
+<h1>Received Friend Requests</h1>
 
 <ul>
-  <% @friends.each do |friend| %>
-    <li><%= friend.name %> (<%= link_to 'Remove', friendship_path(friend), method: :delete, data: { confirm: 'Are you sure?' } %>)</li>
+  <% @received_requests.each do |received_request| %>
+    <li>
+      <p>Sender: <%= received_request.sender.name %></p>
+      <%= link_to 'Accept', accept_friend_request_path(received_request), method: :patch %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to 'View Friends', friendship_index_path %>
+<%= link_to 'View Accepted Friends', accepted_friends_path %>
+<h1>Accepted Friends</h1>
+
+<ul>
+  <% @accepted_friends.each do |friend| %>
+    <li><%= friend.name %></li>
   <% end %>
 </ul>

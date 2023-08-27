@@ -3,6 +3,7 @@ class UsersController < ApplicationController
     @users = User.all
     @posts = current_user.posts
     @users = @users.where("first_name LIKE ?", "%#{params[:search]}%") if params[:search].present?
+    
   end
   def new
   end

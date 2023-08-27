@@ -1,28 +1,41 @@
 class FriendRequestsController < ApplicationController
-  before_action :authenticate_user!
   def new
     @recipient = User.find(params[:recipient_id])
-    @friend_request = current_user.sent_friend_requests.build(recipient: @recipient)
+    @friend_request = FriendRequest.new
   end
+
   def create
-    recipient = User.find(params[:recipient_id])
-    current_user.sent_friend_requests.create(recipient: recipient)
-    redirect_to users_path, notice: 'Friend request sent!'
-  end
+    @friend_request = FriendRequest.new(friend_request_params)
+    @friend_request.sender_id = current_user.id # Assuming you're using Devise or similar for authentication
 
-  def accept
-    request = FriendRequest.find(params[:id])
-    current_user.friends << request.sender
-    request.destroy
-    redirect_to users_path, notice: 'Friend request accepted!'
+    if @friend_request.save
+      redirect_to users_path, notice: 'Friend request sent successfully.'
+    else
+      flash.now[:error] = 'Error sending friend request.'
+      render :new
+    end
   end
-
-  def reject
-    request = FriendRequest.find(params[:id])
-    request.destroy
-    redirect_to users_path, notice: 'Friend request rejected!'
+  
+  def show
+    @friend_request = FriendRequest.find(params[:id])
   end
   def received
     @received_requests = current_user.received_friend_requests
+  end
+  def accept
+    puts "Received params: #{params.inspect}" # Add this line
+    @friend_request = FriendRequest.find(params[:id])
+    @friend_request.update(status: 'accepted')
+  
+    redirect_to received_friend_requests_path, notice: 'Friend request accepted.'
+  end
+  private
+
+  def set_recipient
+    @recipient = User.find(params[:recipient_id])
+  end
+
+  def friend_request_params
+    params.require(:friend_request).permit(:recipient_id)
   end
 end

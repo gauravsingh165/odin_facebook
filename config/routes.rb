@@ -13,15 +13,24 @@ Rails.application.routes.draw do
   resources :comments, only: [:create, :destroy,:new]
    resources :users
 
-resources :friendship, only: [:index, :create, :destroy]
-  resources :users, only: [:index]
+  #  resources :friendship, only: [:index, :create, :destroy]
+  #  get 'accepted_friends', to: 'friendship#accepted_friends', as: 'accepted_friends'
+   resources :friendship, only: [:index, :create, :destroy]
+   get 'accepted_friends', to: 'friendship#accepted_friends', as: 'accepted_friends'
+
+   resources :users, only: [:index]
   
   resources :friend_requests, only: [:new, :create] do
     member do
       post 'accept'
       delete 'reject'
+      get :received
+      get :accept
+
     end
   end
+
+  
   get 'friend_requests/received', to: 'friend_requests#received', as: :received_friend_requests
   
   
