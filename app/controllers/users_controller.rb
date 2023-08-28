@@ -1,9 +1,11 @@
 class UsersController < ApplicationController
   def index
-    @users = User.all
     @posts = current_user.posts
-    @users = @users.where("first_name LIKE ?", "%#{params[:search]}%") if params[:search].present?
-    
+    if params[:search]
+      @users = User.where("first_name LIKE ?", "%#{params[:search]}%")
+    else
+      @users = User.all
+    end
   end
   def new
   end
@@ -11,8 +13,13 @@ class UsersController < ApplicationController
 
   end 
   def show
-    @user = User.find(params[:id])
-
+    begin
+      @user = User.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      # Handle the case where the user is not found
+      flash[:error] = "User with ID #{params[:id]} not found."
+      redirect_to root_path
+    end
   end
   private
 

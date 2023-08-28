@@ -1,22 +1,11 @@
-<!-- The view listing received friend requests -->
-
-<h1>Received Friend Requests</h1>
+<h1>Your Friends</h1>
 
 <ul>
-  <% @received_requests.each do |received_request| %>
+  <% @friendships.each do |friendship| %>
     <li>
-      <p>Sender: <%= received_request.sender.name %></p>
-      <%= link_to 'Accept', accept_friend_request_path(received_request), method: :patch %>
+      <p>Friend: <%= friendship.friend.name %></p>
+      <p>Friend: <%= friendship.friend.email %></p>
+
     </li>
-  <% end %>
-</ul>
-
-<%= link_to 'View Friends', friendship_index_path %>
-<%= link_to 'View Accepted Friends', accepted_friends_path %>
-<h1>Accepted Friends</h1>
-
-<ul>
-  <% @accepted_friends.each do |friend| %>
-    <li><%= friend.name %></li>
   <% end %>
 </ul>

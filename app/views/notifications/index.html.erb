@@ -1,13 +1,14 @@
 <%= link_to "Posts Index", posts_path %>
+<!-- app/views/notifications/index.html.erb -->
+<%= render 'shared/flash_messages' %>
 
 <h1>Notifications</h1>
+
 <ul>
   <% @notifications.each do |notification| %>
     <li>
-      <% if notification.read_status %>
-        <%= notification.message %>
-      <% else %>
-        <strong><%= notification.message %></strong>
+      <% if notification.notification_type == 'friend_request' %>
+        <%= "You have a friend request from #{notification.sender.name}" %>
         <%= link_to 'Mark as Read', mark_as_read_notification_path(notification), method: :patch %>
       <% end %>
     </li>

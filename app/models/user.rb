@@ -11,7 +11,9 @@ class User < ApplicationRecord
   has_many :friends, through: :friendships, source: :friend
   has_many :accepted_friends, -> { where(friendships: { status: 'accepted' }) },
            through: :friendships, source: :friend
-
+  has_many :sent_notifications, class_name: 'Notification', foreign_key: :sender_id
+  has_many :received_notifications, class_name: 'Notification', foreign_key: :recipient_id
+         
   has_many :posts
   has_many :comments, dependent: :destroy
   has_one  :profile, dependent: :destroy

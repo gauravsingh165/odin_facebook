@@ -18,14 +18,10 @@
   box-sizing: border-box;
 }
 </style>
-<!--<% if @user %>
-  <%= link_to 'View Profile', user_path(@user) %>
-<% end %>-->
-  <%= link_to 'Friend Requests', received_friend_requests_path, class: 'btn btn-bounded-info' %>
+  <br>
+  <%= link_to 'Pending Requests', received_friend_requests_path, class: 'btn btn-outline-info rounded-0' %>
   <%= link_to 'Create New Post', new_post_path, class: 'btn btn-outline-primary rounded-0' %>
-        
-  <%# <%= link_to "Users Index", users_path %> 
-  <%= link_to "Notification Index", notifications_path %> 
+  <%# <%= link_to "Notification Index", notifications_path , class: 'btn btn-outline-info rounded-0'%> 
   <div style="text-align: center;">
     <h1 style="color: red">All Posts</h1>
      <% @post.each do |post| %> 

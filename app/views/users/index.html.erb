@@ -1,37 +1,85 @@
-
-
-
-<h1>User Index</h1>
-<%= link_to 'View Friends', friendship_index_path %>
-<%= form_tag(users_path, method: :get) do %>
-  <%= label_tag :search, 'Search by First Name:' %>
-  <%= text_field_tag :search, params[:search] %>
-  <%= submit_tag 'Search' %>
-<% end %> 
-
-<% @users.each do |user| %>
-  <%= link_to "#{user.name}", user %> -
-  <%= link_to 'Send Friend Request', new_friend_request_path(recipient_id: user.id) %> -<br>
-  <% end %>
-
-
-
-<!-- Display posts of the current user
-<%= link_to "Posts Index", posts_path %>
-<h1>All Users</h1>
-<ul>
-  <% @users.each do |user| %>
-    <li>
-      <%= user.name %>
-      <% unless current_user == user %>
-        <%= link_to 'Send Friend Request', new_friend_request_path(recipient_id: user.id) %>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f8f8;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    form {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    label {
+      font-weight: bold;
+    }
+    
+    input[type="text"] {
+      padding: 8px;
+      width: 60%;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    
+    input[type="submit"] {
+      padding: 6px 12px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    .user-list {
+      text-align: center;
+    }
+    
+    .user-item {
+      margin: 10px;
+      padding: 10px;
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      display: inline-block;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .user-links {
+      margin-top: 10px;
+    }
+  </style>
+  <br>
+ <div class="container">
+   <!-- <h1>User Index</h1>
+    <%= form_tag(users_path, method: :get) do %>
+      <%= label_tag :search, 'Name:' %>
+      <%= text_field_tag :search, params[:search] ,placeholder:"search by name"%>
+      <%= submit_tag 'Search' %>
+    <% end %>-->
+    
+    <div class="user-list">
+      <% @users.each do |user| %>
+        <div class="user-item">
+          <h2><%= link_to user.name, user %></h2>
+          <div class="user-links">
+            <%= link_to 'Send Friend Request', new_friend_request_path(recipient_id: user.id), class: "btn btn-outline-primary" %>
+          </div>
+        </div><br>
       <% end %>
-    </li>
-  <% end %>
-</ul> -->
-
-
-
+    </div>
+  </div>
 <style>
 body {
   background-image: url('/assets/fb.webp');

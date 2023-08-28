@@ -1,0 +1,6 @@
+<!-- app/views/shared/_flash_messages.html.erb -->
+<% flash.each do |key, value| %>
+  <div class="alert alert-<%= key %>">
+    <%= value %>
+  </div>
+<% end %>

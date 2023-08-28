@@ -13,8 +13,6 @@ Rails.application.routes.draw do
   resources :comments, only: [:create, :destroy,:new]
    resources :users
 
-  #  resources :friendship, only: [:index, :create, :destroy]
-  #  get 'accepted_friends', to: 'friendship#accepted_friends', as: 'accepted_friends'
    resources :friendship, only: [:index, :create, :destroy]
    get 'accepted_friends', to: 'friendship#accepted_friends', as: 'accepted_friends'
 
@@ -22,10 +20,10 @@ Rails.application.routes.draw do
   
   resources :friend_requests, only: [:new, :create] do
     member do
-      post 'accept'
+      get 'accept'
       delete 'reject'
       get :received
-      get :accept
+      patch :accept
 
     end
   end
@@ -36,9 +34,8 @@ Rails.application.routes.draw do
   
   resources :notifications, only: [:index] do
     member do
-      patch :mark_as_read
+      patch 'mark_as_read'
     end
   end
-
   root "posts#index"
 end
