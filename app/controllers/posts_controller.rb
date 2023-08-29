@@ -9,9 +9,11 @@ class PostsController < ApplicationController
     @post = Post.new
   end
   def create
-    @post = current_user.posts.build(post_params) 
+    @post = current_user.posts.build(post_params)
+  
     if @post.save
-      redirect_to posts_path, notice: 'Post was successfully created.'
+      flash[:notice] = 'Post was successfully created.'
+      redirect_to post_path(@post) # Redirect to the show page of the newly created post
     else
       render :new
     end
@@ -28,20 +30,23 @@ class PostsController < ApplicationController
   end
   def update
     @post = Post.find(params[:id])
-
+  
     if @post.update(post_params)
-      redirect_to post_path(@post), notice: 'Post was successfully updated.'
+      flash.now[:notice] = 'Post was successfully updated.'
+      render turbo_stream: turbo_stream.replace(@post)
     else
       render :edit
     end
   end
+  
 
   def destroy
     @post = Post.find(params[:id])
     @post.comments.destroy_all # Delete associated comments
     @post.likes.destroy_all    # Delete associated likes
     @post.destroy
-    redirect_to posts_path, notice: 'Post was successfully deleted.'
+  
+    render turbo_stream: turbo_stream.remove(@post)
   end
   
   

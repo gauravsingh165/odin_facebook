@@ -19,8 +19,13 @@
 }
 </style>
   <br>
-  <%= link_to 'Pending Requests', received_friend_requests_path, class: 'btn btn-outline-info rounded-0' %>
-  <%= link_to 'Create New Post', new_post_path, class: 'btn btn-outline-primary rounded-0' %>
+  
+<%= turbo_stream_from PostsChannel %>
+
+<%= turbo_stream.replace @post do %>
+  <%= render partial: 'post', collection: @posts %>
+<% end %>
+
   <%# <%= link_to "Notification Index", notifications_path , class: 'btn btn-outline-info rounded-0'%> 
   <div style="text-align: center;">
     <h1 style="color: red">All Posts</h1>

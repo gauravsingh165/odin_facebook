@@ -1,0 +1,43 @@
+<br>
+<div style="text-align:center">
+    <%= link_to 'Back', posts_path, class: 'btn btn-outline-secondary btn-sm rounded-0' %><br>
+
+<%= turbo_frame_tag dom_id(@post) do %>
+  <div class="post">
+    <h2><%= @post.title %></h2>
+    <p><%= @post.content %></p>
+    <!-- Add more content and formatting as needed -->
+ 
+  
+  <% if current_user == @post.user %>
+    <%= link_to 'Edit', edit_post_path(@post), class: 'btn btn-outline-primary btn-sm rounded-0' %> 
+    <%= link_to 'Delete Post', post_path(@post), method: :delete, data: { turbo_method: :delete }, class: 'btn btn-danger btn-sm rounded-0', confirm: 'Are you sure you want to delete this post?' %>
+  <% end %>
+  
+  <br>
+  <% if @post.image.attached? %>
+    <%= image_tag @post.image, style: 'width: 300px; height: 300px;' %>
+  <% end %><br>
+  
+  <div>
+    <% if user_signed_in? %>
+      <% if current_user.like?(@post) %>
+        <%= link_to 'Unlike', unlike_post_path(@post), method: :post, class: 'btn btn-outline-danger btn-sm rounded-0' %>
+      <% else %>
+        <%= link_to 'Like', like_post_path(@post), method: :post, class: 'btn btn-outline-primary btn-sm rounded-0' %>
+      <% end %>
+    <% end %>
+    Likes: <%= @post.likes.count %>
+    <%= form_for Comment.new do |f| %>
+     <%= f.text_field :content %>
+     <%= f.hidden_field :post_id , value: @post.id%>
+     <%= f.hidden_field :user_id , value: current_user.id%>
+     <%= f.submit 'Add Comment' %>
+    <% end %>
+  </div>
+<%@post.comments.each do |comment|%>
+  <%=comment.content%><br>
+<%end%>
+</div>
+ </div>
+<% end %>

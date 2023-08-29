@@ -18,5 +18,7 @@ module OdinFaceB
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.assets.paths << Rails.root.join('app', 'assets', 'javascripts', 'your_path_here')
+
   end
 end

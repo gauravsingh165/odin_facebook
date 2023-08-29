@@ -12,6 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <%# <%= javascript_include_tag 'turbo', 'cable', 'application' %> 
 
     <style>
       .navbar-brand img {
@@ -23,6 +24,7 @@
 <%= stylesheet_link_tag 'custom_devise_styles', media: 'all' %>
 
   </head>
+
   <% if user_signed_in? %>
   <body style="background-color:powderblue ;">
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
@@ -34,14 +36,10 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <nav class="navbar navbar-light bg-light">
-          <form class="form-inline" action="<%= users_path %>" method="get">
-            <%= text_field_tag :search, params[:search], class: "form-control mr-sm-2", placeholder: "Search by name", aria_label: "Search" %>
-            <%= submit_tag 'Search', class: "btn btn-outline-success my-2 my-sm-0" %>
-          </form>
-        </nav>
+       
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+           <%= link_to 'Create New Post', new_post_path, class: 'btn btn-outline-primary rounded-0' %>
           <li class="nav-item">
             <a class="nav-link" href="<%=users_path %>">User</a>
           </li>
@@ -56,7 +54,20 @@
             <a class="nav-link" href="<%=friendship_index_path %>">Friends</a>
           </li>
         </div>
-          <li class="nav-item">
+       
+            
+              <nav class="navbar navbar-light bg-light">
+          <form class="form-inline" action="<%= users_path %>" method="get">
+            <%= text_field_tag :search, params[:search], class: "form-control mr-sm-2 rounded-0", placeholder: "Search by name", aria_label: "Search" %>
+            <%= submit_tag 'Search', class: "btn btn-outline-success my-2 my-sm-0 rounded-0" %>
+          </form>
+        </nav>
+            <a class="navbar-brand" href="<%= root_path %>">
+            <% if current_user.profile_photo.attached? %>
+              <%= link_to user_path(current_user) do %>
+                <%= image_tag current_user.profile_photo, style: 'width: 50px; height: 40px;' %>
+              <% end %>
+            <% end %>
             <% if user_signed_in? %>
               <strong><%= current_user.name.titleize %><strong>
               <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navabr-link btn btn-outline-info  rounded-0'%>
@@ -65,16 +76,18 @@
               <%= link_to 'Sign up', new_user_registration_path, :class => 'navabr-link btn btn-outline-success rounded-0 '%>
               <%= link_to 'Login', new_user_session_path, :class => 'navabr-link btn btn-success rounded-0 '%>
             <%end%>
-          </li>           
+                 
       </div>
     </nav>
   <%end%>  
+    <%= turbo_include_tags %>
+
   <%= render 'shared/flash_messages' %>
 
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>
-    <footer class="sticky-footer text-center text-white" style="text-align: center; background-color: #ADD8E6; padding: 10px; position: absolute; bottom: 0; width: 100%;">
+    <footer class=" text-center text-white" style="text-align: center; background-color: #ADD8E6;">
   <!-- Grid container -->
   <div class="container pt-4">
     <!-- Section: Social media -->

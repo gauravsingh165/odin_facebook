@@ -1,4 +1,6 @@
+<br>
 <h1>Your Friends</h1>
+ <%= link_to 'Friend Requests', received_friend_requests_path, class: 'btn btn-outline-info rounded-0' %>
 
 <ul>
   <% @friendships.each do |friendship| %>
@@ -9,3 +11,5 @@
     </li>
   <% end %>
 </ul>
+
+      
